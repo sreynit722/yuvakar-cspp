@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>យុវការ-ស្វែងរកអចលទ្រព្យ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Metal&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/webp" href="./image/SURAKA LOGO.webp">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Metal", serif;
+            font-weight: 400;
+            font-style: normal;
+            
+        }
+
+        :root {
+            --primary: #0b1120;
+            --accent: #d4af37;
+            --accent-hover: #bfa030;
+            --text-dark: #1e293b;
+            --text-light: #cbd5e1;
+            --bg-main: #f1f5f9;
+            --bg-card: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: cadetblue;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .navbar { 
+            width: 100%; 
+            background: var(--primary); 
+            color: white; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px 40px; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            animation: fadeInDown 0.6s ease-out forwards;
+        } 
+        .logo-link {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            transition: var(--transition);
+        }
+        .logo:hover {
+            transform: rotate(360deg);
+        }
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 25px; 
+        } 
+        .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            font-size: 15px;
+            font-weight: 500;
+            transition: var(--transition); 
+            position: relative;
+            padding: 5px 0;
+        } 
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover { 
+            color: var(--accent); 
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 140px auto 60px auto; 
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .search-box {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 100; 
+            animation: fadeInUp 0.6s ease-out 0.4s both;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            align-items: end;
+        }
+
+        .filter-label {
+            display: block; 
+            font-weight: 600; 
+            margin-bottom: 10px; 
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .drop-btn {
+            width: 100%;
+            background: #fff;
+            color: var(--text-dark);
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 14px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        .drop-btn::after {
+            content: '▾';
+            font-size: 12px;
+            color: #64748b;
+            transition: var(--transition);
+        }
+        .drop-btn:hover {
+            border-color: var(--primary);
+        }
+        .dropdown:hover .drop-btn {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(11, 17, 32, 0.05);
+        }
+        .dropdown:hover .drop-btn::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15); 
+            padding: 15px;
+            z-index: 160; 
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .dropdown-content label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 6px;
+            font-weight: 500;
+            font-size: 14px;
+            color: #475569;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+        .dropdown-content label:hover {
+            color: var(--accent-hover);
+            background: #f8fafc;
+        }
+        .dropdown-content input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            background: #fff;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        input[type="number"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(11, 17, 32, 0.05);
+        }
+
+        .search-btn {
+            margin-top: 30px;
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--primary);
+            background: var(--primary);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .search-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--primary);
+            transform: scale(1.005);
+        }
+
+        #results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 10px 0;
+            z-index: 1; 
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .result-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .result-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(11, 17, 32, 0.12);
+        }
+
+        .card-image {
+            height: 220px;
+            overflow: hidden;
+            background: #e2e8f0;
+            position: relative;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .result-card:hover .card-image img {
+            transform: scale(1.08);
+        }
+
+        .card-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .card-content h3 {
+            margin-bottom: 12px;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary);
+            line-height: 1.3;
+        }
+
+        .info {
+            margin-bottom: 8px;
+            color: #64748b;
+            font-size: 15px;
+            display: flex;
+            gap: 6px;
+        }
+        .info strong {
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        #pagination {
+            margin-top: 50px;
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        #pagination button {
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            background: white;
+            color: var(--primary);
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        #pagination button:hover {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .realestate-footer {
+            background: var(--primary);
+            color: #ffffff;
+            padding: 60px 40px 30px 40px;
+          
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .footer-brand h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+        
+        .footer-brand p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        
+        .footer-links h3,
+        .footer-contact h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .footer-links a {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .footer-contact p {
+            margin-bottom: 12px;
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 50px auto 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-wrapper {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .container {
+                margin-top: 180px;
+                padding: 0 16px;
+            }
+            h1 {
+                font-size: 34px;
+                margin-bottom: 20px;
+            }
+            .search-box {
+                padding: 25px;
+            }
+            .filter-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            #results {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            .footer-wrapper {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-links a:hover {
+                transform: translateX(0) translateY(-2px);
+            }
+            .realestate-footer {
+                padding: 40px 20px;
+             
+            }
+        }
+</style>
+</head>
+<body>
+
+  <nav class="navbar"> 
+    <div><a href="./homepage1.html"><img class="logo" src="./image/SURAKA LOGO.webp" alt="SURAKA logo"></a></div>
+    <ul class="nav-links">
+        <li><a href="./homepage1.html">គេហទំេព័រ</a></li>  
+        <li><a href="./aboutus1.html">អំពីយើង</a></li> 
+        <li><a href="./contact១.html">ទាក់ទង់</a></li>
+        <li><a href="./guide1.html">ការណែនាំ</a></li> 
+        <li><a href="./findproperty1.html">ស្វែងរកអចលនទ្រព្យ</a></li> 
+        <li><a href="./sell1.html">លក់ អចលនទ្រព្យ</a></li> 
+        <li><a href="./FindProperty.html">បកទៅអង្គគ្លេស៍</a></li>
+        <li><a href="./account11.html">គណនី</a></li> 
+    </ul> 
+  </nav> 
+
+  <div class="container">
+    <h1>ស្វែងរកអចលនទ្រព្យ</h1>
+
+    <div class="search-box">
+      <div class="filter-grid">
+        
+        <div class="dropdown">
+          <button class="drop-btn">តំបន់ ▾</button>
+         <div class="dropdown-content">
+          <label><input type="checkbox" class="place" value="ភ្នំពេញ"> ភ្នំពេញ</label>
+          <label><input type="checkbox" class="place" value="សៀមរាប"> សៀមរាប </label>
+          <label><input type="checkbox" class="place" value="សីហនុវីល"> សីហនុវីល</label>
+          <label><input type="checkbox" class="place" value="តាខ្មៅ-ដែនដីខេត្រកណ្តាល"> តាខ្មៅ-ដែនដីខេត្រកណ្តាល</label>
+          <label><input type="checkbox" class="place" value="អរីយក្សត្រ-នវភារា"> អរីយក្សត្រ-នវភារា</label>
+         </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="drop-btn">ប្រភេទ ▾</button>
+          <div class="dropdown-content">
+            <label><input type="checkbox" class="type" value="ភូមិគ្រឹះ"> ភូមិគ្រឹះ</label>
+            <label><input type="checkbox" class="type" value="ពាណិជ្ជកម្ម"> ពាណិជ្ជកម្ម</label>
+            <label><input type="checkbox" class="type" value="ដីមិនទាន់អភិវឌ្ឍ"> ដីមិនទាន់អភិវឌ្ឍ</label>
+            <label><input type="checkbox" class="type" value="ឧស្សាហកម្ម"> ឧស្សាហកម្ម</label>
+            <label><input type="checkbox" class="type" value="អាប៊ាត់ម័ង់"> អាប៊ាត់ម័ង់</label>
+            <label><input type="checkbox" class="type" value="មហាផែនការ"> មហាផែនការ</label>
+          </div>
+        </div>
+
+        <div>
+          <label style="display:block; font-weight:bold; margin-bottom:8px; font-size:14px;">តិចបំផុត</label>
+          <input type="number" id="minPrice" placeholder="Minimum ($)">
+        </div>
+
+        <div>
+          <label style="display:block; font-weight:bold; margin-bottom:8px; font-size:14px;">ច្រើនបំផុត</label>
+          <input type="number" id="maxPrice" placeholder="Maximum ($)">
+        </div>
+
+      </div>
+      <button class="search-btn" onclick="searchLand()">ស្វែងរក</button>
+    </div>
+
+    <div id="results"></div>
+    <div id="pagination"></div>
+  </div>
+
+        <footer class="realestate-footer">
+  <div class="footer-space"></div>
+  <div class="footer-wrapper">
+    <div class="footer-brand">
+      <h2>យុវការ-កម្ពុជទេស</h2>
+      <p>
+       ដំណោះស្រាយអចលនទ្រព្យដ៏ឧត្តុង្គឧត្តម សម្រាប់ការទិញ លក់ និងជួល វិមាននិងអចលនទ្រព្យដ៏ប្រណីត ក្នុងទឹកដីកម្ពុជា។
+      </p>
+    </div>
+    <div class="footer-links">
+      <h3>ស្វែងរក</h3>
+      <a href="./sell1.html">លក់ អចលនទ្រព្យ</a>
+      <a href="./findproperty1.html">ស្វែងរក អចលនទ្រព្យ</a>
+      <a href="./guide1.html">ការណែនាំ</a>
+    </div>
+
+    <div class="footer-links">
+      <h3>ក្រុមយើង</h3>
+      <a href="./aboutus1.html">អំពីយើង</a>
+      <a href="./contact១.html">ទាក់ទង់</a>
+    </div>
+
+    <div class="footer-contact">
+      <h3>ទាក់ទង់</h3>
+      <p>អាសយដ្ឋាន អគារលេខ១២៧ ផ្លូវ៣១៥ សង្កាត់បឺងកក់២ ខណ្ឌទូលគោក រាជភារាភ្នំពេញ</p>
+      <p>លេខ ទូរស័ព្ធ 012345678</p>
+      <p>អុីមែល YUVAKAR@gmail.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© ២០២៦ យុវការ. រក្សាគ្រប់សិទ្ធិ.</p>
+  </div>
+</footer>  
+
+<script>
+const database = [
+{title:"វីឡា​ សារីភូ",location:"ភ្នំពេញ",type:"ភូមិគ្រឹះ",price:7500000,image:"image/1.1.1.webp"},
+{title:"អាប៊ាត់ម័ង់ ស៊ុលផ្រា",location:"ភ្នំពេញ",type:"អាប៊ាត់ម័ង់",price:70000,image:"image/1.5.1.webp"},
+{title:"ផ្ទះ កៅគី",location:"សៀមរាប",type:"ភូមិគ្រឹះ",price:65000,image:"image/3.1.1.jpg"},
+{title:"សុរាគារជាតិខ្មែរ",location:"សីហនុវីល",type:"ឧស្សាហកម្ម",price:3600000,image:"image/2.4.1.jpg"},
+{title:"ផ្ទះ ជីរ៉ាយូ",location:"តាខ្មៅ-ដែនដីខេត្រកណ្តាល",type:"ភូមិគ្រឹះ",price:80000,image:"image/4.1.1.jpg"},
+{title:"ផ្ទះ ស្វាយមាស",location:" អរីយក្សត្រ-នវភារា",type:"ភូមិគ្រឹះ",price:50000,image:"image/5.1.1.jpg"},
+{title:"មជ្ឈមណ្ឌលសន្និបាត ហរិរ័ក្ស",location:"ភ្នំពេញ",type:"មហាផែនការ",price:250000000,image:"image/1.6.1.jpg"},
+{title:"សាវីវាំ និវេសន៍",location:"សីហនុវីល",type:"ភូមិគ្រឹះ",price:500000,image:"image/2.1.1.webp"},
+{title:"វិថី ចៅឃុប",location:"សៀមរាប",type:"ពាណិជ្ជកម្ម",price:70000,image:"image/3.2.1.jpg"},
+{title:"ផ្ទះ យុវនាថ",location:"ភ្នំពេញ",type:"ភូមិគ្រឹះ",price:600000,image:"image/1.1.3.webp"},
+{title:"វីឡា ហ្លួង",location:"ភ្នំពេញ",type:"ភូមិគ្រឹះ",price:400000,image:"image/1.1.2.jpeg"},
+{title:"ប៊ុលដីញ សុីរ័ក្ស",location:"សីហនុវីល",type:"ពាណិជ្ជកម្ម",price:20000000,image:"image/2.2.1.jpeg"},
+{title:"វាល កំពូល",location:"ភ្នំពេញ",type:"ដីមិនទាន់អភិវឌ្ឍ",price:70000,image:"image/1.3.1.jpg"},
+{title:"វាល ទួលពង្រ",location:"ភ្នំពេញ",type:"ដីមិនទាន់អភិវឌ្ឍ",price:120000,image:"image/1.3.2.webp"},
+{title:"ផ្ទះ ឥស្សាពោធិ៍",location:"សីហនុវីល",type:"ភូមិគ្រឹះ",price:50000,image:"image/2.1.2.jpg"},
+{title:"សណ្ឋាគារ គីរីស៉ារ៉ា",location:"សៀមរាប",type:"មហាផែនការ",price:49070000,image:"image/3.6.1.jpg"},
+{title:"ផ្សារ ខេត្រកណ្តាល",location:"តាខ្មៅ-ដែនដីខេត្រកណ្តាល",type:"មហាផែនការ",price:30000000,image:"image/4.6.1.webp"},
+{title:"រុក្ខវីថី សិរីវង្ស",location:"តាខ្មៅ-ដែនដីខេត្រកណ្តាល",type:"ពាណិជ្ជកម្ម",price:370000,image:"image/4.2.1.jpg"},
+{title:"ផ្ទះ ធម្មានុរ័ក្ស",location:"អរីយក្សត្រ-នវភារា",type:"ភូមិគ្រឹះ",price:140000,image:"image/5.1.2.webp"},
+{title:"អាប៊ាត់ម័ង់ សួគ៍ាល័យ",location:"ភ្នំពេញ",type:"អាប៊ាត់ម័ង់",price:40000,image:"image/1.5.2.webp"},
+{title:"វាល ស្វាយសែនដំរី",location:"សីហនុវីល",type:"ដីមិនទាន់អភិវឌ្ឍ",price:79000,image:"image/2.3.1.webp"},
+{title:"មហាវីថី ចមចក្រី",location:"តាខ្មៅ-ដែនដីខេត្រកណ្តាល",type:"ភូមិគ្រឹះ",price:100000,image:"image/4.1.2.jpeg"},
+{title:"ដី ឃុនរ័ក្ស",location:"ភ្នំពេញ",type:"ដីមិនទាន់អភិវឌ្ឍ",price:90000,image:"image/1.3.3.jpg"},
+{title:"អាប៊ាត់ម័ង់ សុរាការ",location:"ភ្នំពេញ",type:"ពាណិជ្ជកម្ម",price:70000,image:"image/1.2.2.jpg"},
+{title:"ដី មឿនរង់",location:"អរីយក្សត្រ-នវភារា",type:"ដីមិនទាន់អភិវឌ្ឍ",price:40000,image:"image/5.3.1.jpg"},
+{title:"ផ្ទះ ធ្នង់ធំ",location:"ភ្នំពេញ",type:"ពាណិជ្ជកម្ម",price:80000,image:"image/1.2.1.jpg"},
+{title:"ដី ឃុនខាត់",location:"សៀមរាប",type:"ដីមិនទាន់អភិវឌ្ឍ",price:45000,image:"image/3.3.2.jpg"},
+{title:"ផ្ទះ ធម្មានន្ទ",location:"សៀមរាប",type:"ភូមិគ្រឹះ",price:70000,image:"image/3.1.2.jpg"},
+{title:"ផ្ទះ ប៉ាណ្ណារ៉ា",location:"សៀមរាប",type:"ភូមិគ្រឹះ",price:80000,image:"image/3.1.3.webp"},
+{title:"ដី ង្វៀន វ៉ាន់ធឿង",location:"អរីយក្សត្រ-នវភារា",type:"ដីមិនទាន់អភិវឌ្ឍ",price:70000,image:"image/5.3.2.webp"},
+{title:"ឥន្រ្ទាវង្ស អាកាស",location:"ភ្នំពេញ",type:"អាប៊ាត់ម័ង់",price:90000,image:"image/1.5.3.jpg"},
+{title:"ដី យុវវង្ស",location:"សៀមរាប",type:"ដីមិនទាន់អភិវឌ្ឍ",price:70000,image:"image/3.3.1.jpg"},
+{title:"វាល សេ២១",location:"សីហនុវីល",type:"ដីមិនទាន់អភិវឌ្ឍ",price:16370000,image:"image/2.3.2.webp"},
+{title:"ខ័នដូ ពលពង្ស",location:"សីហនុវីល",type:"អាប៊ាត់ម័ង់",price:90000,image:"image/2.5.1.webp"},
+{title:"ខ័នដូ ព្រែកសំរោង",location:"តាខ្មៅ-ដែនដីខេត្រកណ្តាល",type:"អាប៊ាត់ម័ង់",price:32000,image:"image/4.5.1.webp"},
+{title:"បណ្ណាល័យ ហស្សាកាន្ធ",location:"ភ្នំពេញ",type:"មហាផែនការ",price:14070000,image:"image/1.6.2.jpg"},
+{title:"វាល ដារាវង្ស",location:"តាខ្មៅ-ដែនដីខេត្រកណ្តាល",type:"ដីមិនទាន់អភិវឌ្ឍ",price:310000,image:"image/4.3.1.jpg"},
+{title:"វាល នវសកល",location:"សៀមរាប",type:"ដីមិនទាន់អភិវឌ្ឍ",price:95000,image:"image/3.3.3.jpg"},
+{title:"អគ្គីសន្នីស្ថានអាតូមិកស៊ុនលី ",location:"ភ្នំពេញ",type:"ឧស្សាហកម្ម",price:6000000000,image:"image/1.4.1.jpg"},
+{title:"រោង ហ៍សរស",location:"អរីយក្សត្រ-នវភារា",type:"ពាណិជ្ជកម្ម",price:80000,image:"image/5.2.y.jpg"},
+{title:"ទីស្នាក់ការ ក្រុមហ៊ុនជីងហាប់",location:"តាខ្មៅ-ដែនដីខេត្រកណ្តាល",type:"ពាណិជ្ជកម្ម",price:700000,image:"image/4.2.2.jpg"},
+{title:"រោងចក្រគីមី សីហនរគុត្ត",location:"ភ្នំពេញ",type:"ឧស្សាហកម្ម",price:7700000,image:"image/chemicalplant.jpg"},
+{title:"ខ័នដូ ម្រតាញ​",location:"សីហនុវីល",type:"មហាផែនការ",price:5670000,image:"image/2.6.1.webp"},
+{title:"ដី ស្រីនិច",location:"តាខ្មៅ-ដែនដីខេត្រកណ្តាល",type:"ដីមិនទាន់អភិវឌ្ឍ",price:160000,image:"image/4.3.2.jpg"},
+{title:"កោះ សន្តិរ័ក្ស",location:"សីហនុវីល",type:"ដីមិនទាន់អភិវឌ្ឍ",price:25500000,image:"image/2.3.3.jpg"},
+{title:"អាប៊ាត់ម័ង់ ម៉ាលីការ",location:"សីហនុវីល",type:"អាប៊ាត់ម័ង់",price:47000,image:"image/2.5.2.webp"},
+{title:"ដី ច្រេសជួរ",location:"សៀមរាប",type:"ពាណិជ្ជកម្ម",price:334000,image:"image/3.2.2.jpg"},
+{title:"បុរី ច័ន្ទ្រាវង្ស",location:"អរីយក្សត្រ-នវភារា",type:"ពាណិជ្ជកម្ម",price:47000,image:"image/5.2.1.webp"},
+{title:"ដី តាឌី",location:"តាខ្មៅ-ដែនដីខេត្រកណ្តាល",type:"ដីមិនទាន់អភិវឌ្ឍ",price:320000,image:"image/4.3.3.jpg"},
+{title:"ផ្ទះ ព្រែកបែក",location:"សៀមរាប",type:"ភូមិគ្រិះ",price:67000,image:"image/3.1.4.jpg"},
+{title:"រោងចក្រកាត់ដេរ កេតុមាលា",location:"ភ្នំពេញ",type:"ឧស្សាហកម្ម",price:9000000,image:"image/1.4.2.jpg"},
+];
+
+
+let currentPage = 1;
+let currentData = database;
+const itemsPerPage = 9;
+
+function displayResults(data, page = 1) {
+    const results = document.getElementById("results");
+    results.innerHTML = "";
+
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const pageData = data.slice(start, end);
+
+    if (pageData.length === 0) {
+        results.innerHTML = "<p style='grid-column: 1/-1; text-align: center; font-size: 18px; color: #666; padding: 40px 0;'>No property found matching your criteria.</p>";
+        document.getElementById("pagination").innerHTML = "";
+        return;
+    }
+
+    pageData.forEach(item => {
+        results.innerHTML += `
+        <div class="result-card">
+            <div class="card-image">
+                <img src="${item.image}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/340x200?text=Property+Image'">
+            </div>
+            <div class="card-content">
+                <h3>${item.title}</h3>
+                <div class="info"><strong>Location:</strong> ${item.location}</div>
+                <div class="info"><strong>Type:</strong> ${item.type}</div>
+                <div class="price">$${item.price.toLocaleString()}</div>
+            </div>
+        </div>
+        `;
+    });
+
+    createPagination(data);
+}
+
+function createPagination(data) {
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+
+    const totalPages = Math.ceil(data.length / itemsPerPage);
+    if(totalPages <= 1) return;
+
+    for (let i = 1; i <= totalPages; i++) {
+        const activeStyle = i === currentPage ? 'background: #d4af37; color: #0b1120; border-color: #d4af37;' : '';
+        pagination.innerHTML += `
+        <button style="${activeStyle}" onclick="goToPage(${i})">${i}</button>
+        `;
+    }
+}
+
+function goToPage(page) {
+    currentPage = page;
+    displayResults(currentData, currentPage);
+    window.scrollTo({top: document.getElementById('results').offsetTop - 140, behavior: 'smooth'});
+}
+
+function searchLand() {
+    const places = [...document.querySelectorAll(".place:checked")].map(box => box.value);
+    const types = [...document.querySelectorAll(".type:checked")].map(box => box.value);
+    const min = document.getElementById("minPrice").value;
+    const max = document.getElementById("maxPrice").value;
+
+    const filtered = database.filter(item => {
+        const placeMatch = places.length === 0 || places.includes(item.location.trim());
+        const typeMatch = types.length === 0 || types.includes(item.type.trim());
+        const minMatch = min === "" || item.price >= Number(min);
+        const maxMatch = max === "" || item.price <= Number(max);
+
+        return placeMatch && typeMatch && minMatch && maxMatch;
+    });
+
+    currentData = filtered;
+    currentPage = 1;
+    displayResults(currentData, currentPage);
+}
+
+displayResults(database);
+</script>
+</body>
+</html>

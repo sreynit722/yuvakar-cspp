@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YUVAKAR-AboutUs</title>
+    <link rel="icon" type="image/webp" href="./image/SURAKA LOGO.webp">
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      background: #f5f5f5;
+      color: #333;
+      overflow-x: hidden; 
+    }
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .navbar { 
+      width: 100%; 
+      background: #0b1120; 
+      color: white; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 15px 40px; 
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      animation: fadeInDown 0.8s ease-out forwards;
+    } 
+    .logo {
+      width: 50px;
+      height: 50px;
+      transition: transform 0.4s ease;
+    }
+    .logo:hover {
+      transform: rotate(360deg);
+    }
+    .nav-links { 
+      display: flex; 
+      list-style: none; 
+      gap: 30px; 
+    } 
+    .nav-links a { 
+      color: white; 
+      text-decoration: none; 
+      transition: 0.3s; 
+      position: relative;
+    } 
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #d4af37;
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .nav-links a:hover { 
+      color: #d4af37; 
+    }
+    .about-hero {
+      background: url("./image/SURAKA\ b.jpg") center/cover no-repeat;
+      color: white;
+      padding: 140px 20px 100px 20px;
+      text-align: center;
+      height: 450px ;
+    }
+    .hero-content h1 {
+      font-size: 50px;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+    .hero-content p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 18px;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+    .about-company {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      padding: 60px 10%;
+      background: white;
+    }
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+      animation: fadeInLeft 1s ease-out 0.4s both;
+    }
+    .about-text h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #1e3a8a;
+    }
+    .about-text p {
+      margin-bottom: 20px;
+      color: #555;
+    }
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+      animation: fadeInRight 1s ease-out 0.4s both;
+    }
+    .about-image img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .about-image img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    .mora{
+      text-align: center;
+      color: whitesmoke;
+      font-size: 40px;
+      background-color: navy;
+      padding-top: 30px;
+    }
+    .team{
+      padding:40px 6% 60px 6%;
+      background-color: rgb(255, 0, 0); 
+      text-align:center;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:20px;
+    }
+    .member{
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border:1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      animation: fadeInUp 0.8s ease-out 0.6s both;
+    }
+    .member:hover{
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+    }
+    .member img{
+      width:110px;
+      height:110px;
+      border-radius:50%;
+      object-fit:cover;
+      margin-bottom:15px;
+      transition: transform 0.4s ease;
+    }
+    .member:hover img {
+      transform: scale(1.1);
+    }
+    .thespace{
+      text-align: center;
+      color: whitesmoke;
+      font-size: 20px;
+      background-color: navy;
+      padding: 40px;
+    }
+    .thespace p {
+      display: inline-block;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .realestate-footer {
+      position: relative;
+      background: #0b1120;
+      color: #ffffff;
+      padding: 50px;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .footer-space {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 300px;
+      background: transparent;
+    }
+    .footer-wrapper {
+      margin-left: 150px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+    }
+    .footer-brand h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+      color: #d4af37;
+    }
+    .footer-brand p {
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .footer-links h3,
+    .footer-contact h3 {
+      margin-bottom: 18px;
+      color: #d4af37;
+      font-size: 20px;
+    }
+    .footer-links a {
+      display: block;
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: #d4af37;
+      transform: translateX(8px); 
+    }
+    .footer-contact p {
+      margin-bottom: 12px;
+      color: #cbd5e1;
+    }
+    .footer-bottom {
+      margin-top: 50px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+    @media (max-width: 992px) {
+      .navbar {
+        padding: 15px 20px;
+      }
+      .nav-links {
+        gap: 15px;
+      }
+      .about-hero h1 {
+        font-size: 40px;
+      }
+      .team {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-wrapper {
+        margin-left: 0;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-space {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      
+      .navbar {
+        flex-direction: column;
+        padding: 15px;
+        position: relative;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+      }
+      .about-hero {
+        padding: 60px 20px;
+        height: auto;
+      }
+      .about-hero h1 {
+        font-size: 32px;
+      }
+      .about-hero p {
+        font-size: 16px;
+      }
+      .about-company {
+        flex-direction: column;
+        padding: 40px 20px;
+      }
+      .about-text h2 {
+        font-size: 28px;
+      }
+      .team {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 40px 20px;
+      }
+      .member {
+        padding: 20px;
+      }
+      .member img {
+        width: 90px;
+        height: 90px;
+      }
+      .realestate-footer {
+        padding: 40px 20px;
+      }
+      .footer-wrapper {
+        margin-left: 0;
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .mora {
+        font-size: 30px;
+      }
+      .thespace {
+        font-size: 18px;
+        padding: 25px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .logo {
+        width: 45px;
+        height: 45px;
+      }
+      .about-hero h1 {
+        font-size: 26px;
+      }
+      .team {
+        grid-template-columns: 1fr;
+      }
+      .member h2,
+      .member h3 {
+        font-size: 18px;
+      }
+      .member p {
+        font-size: 14px;
+      }
+    }
+  </style>
+  <body>
+    <nav class="navbar"> 
+      <div><a href="./homepage.html"><img class="logo" src="./image/SURAKA LOGO.webp" alt="SURAKA logo"></a></div>
+      <ul class="nav-links">
+        <li><a href="./homepage.html">Home</a></li> 
+        <li><a href="./aboutus.html">About</a></li> 
+        <li><a href="./guide.html">Guideline</a></li>
+        <li><a href="./contact.html">Contact</a></li> 
+        <li><a href="./FindProperty.html">Find Property</a></li> 
+        <li><a href="./sell.html">Register Property</a></li> 
+        <li><a href="./aboutus1.html">Into Khmer</a></li>
+        <li><a href="./account1.html">Account</a></li> 
+      </ul> 
+    </nav> 
+
+    <section class="about-hero">
+      <div class="hero-content">
+        <h1>About Us</h1>
+        <p>
+          We help digitalize the biggest market in the world—real estate. 
+          Our platform empowers buyers and investors to land great deals smoothly.
+        </p>
+      </div>
+    </section>
+
+    <section class="about-company">
+      <div class="about-text">
+        <h2>Who We Are</h2>
+        <p>
+          Our team is passionate about reimagining the Cambodia real estate 
+          market through digitalization to boost economic growth, development, 
+          and the overall standard of living.
+        </p>
+        <p>
+          Our journey started when we noticed a critical gap in centralized communities 
+          and reliable information channels. This landscape made communication a huge 
+          barrier between eager buyers and sellers.
+        </p>
+        <p>
+          Our mission is to bridge that gap. We share government development plans, 
+          academic guidelines, and highlight high-yield land developments to contribute 
+          toward economic prosperity.
+        </p>
+      </div>
+      <div class="about-image">
+        <img src="./image/SURAKA LOGO.webp" alt="About SURAKA" />
+      </div>
+    </section>
+
+    <h2 class="mora">Meet the Team</h2>
+    <section class="team">
+      <div class="member" style="animation-delay: 0.1s;">
+        <img src="./image/wathanak.jpg" alt="Meas Serei Wathanak" />
+        <h2>Meas Serei Wathanak</h2>
+        <p>Team Lead</p>
+      </div>
+      <div class="member" style="animation-delay: 0.2s;">
+        <img src="./image/Houyleng.jpg" alt="Kim Houyleng" />
+        <h3>Kim Houyleng</h3>
+        <p>Tech Support</p>
+      </div>
+      <div class="member" style="animation-delay: 0.3s;">
+        <img src="./image/Visal.jpg" alt="Sunly Vongvisal" />
+        <h3>Sunly Vongvisal</h3>
+        <p>Inspector</p>
+      </div>
+      <div class="member" style="animation-delay: 0.4s;">
+        <img src="./image/Neath.jpg" alt="Seng SupheakNeath" />
+        <h3>Seng SupheakNeath</h3>
+        <p>Tech Support</p>
+      </div>
+      <div class="member" style="animation-delay: 0.5s;">
+        <img src="./image/nyda.jpg" alt="Ouk Ranyda" />
+        <h3>Ouk Ranyda</h3>
+        <p>Researcher</p>
+      </div>
+    </section>
+
+    <section class="thespace"><p>JAYA KAMBUJPRADESH</p></section>
+
+    <footer class="realestate-footer">
+      <div class="footer-space"></div>
+      <div class="footer-wrapper">
+        <div class="footer-brand">
+          <h2>YUVAKAR</h2>
+          <p>
+            Premium real estate solutions for buying, selling, and renting luxury properties in Kambuja.
+          </p>
+        </div>
+        <div class="footer-links">
+          <h3>Explore</h3>
+          <a href="./sell.html">Register Property</a>
+          <a href="./FindProperty.html">Find Property</a>
+          <a href="./guide.html">Guideline</a>
+        </div>
+        <div class="footer-links">
+          <h3>Company</h3>
+          <a href="./aboutus.html">About Us</a>
+          <a href="./contact.html">Contact</a>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact</h3>
+          <p>Address: St312 Toulkouk, Kambuja</p>
+          <p>Phone: 012345678</p>
+          <p>Email: YUVAKAR@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 YUVAKAR. All Rights Reserved.</p>
+      </div>
+    </footer> 
+  </body>
+</html>

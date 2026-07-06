@@ -1,0 +1,558 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+  <title>យុវការ-គេហទំព័រ</title> 
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Metal&display=swap" rel="stylesheet">
+
+</head> 
+<style>
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: Arial, Helvetica, sans-serif; 
+     font-family: "Metal", serif;
+    font-weight: 400;
+    font-style: normal; 
+  } 
+  body { 
+    background: #f5f5f5; 
+    overflow-x: hidden;
+  } 
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  .navbar { 
+    width: 100%; 
+    background: #0b1120; 
+    color: white; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 40px; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    animation: fadeInDown 0.8s ease-out forwards;
+  } 
+  .logo {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.4s ease;
+  }
+  .logo:hover {
+    transform: rotate(360deg);
+  }
+  .nav-links { 
+    display: flex; 
+    list-style: none; 
+    gap: 30px; 
+  } 
+  .nav-links a { 
+    color: white; 
+    text-decoration: none; 
+    transition: 0.3s; 
+    position: relative;
+  } 
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #d4af37;
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+  .nav-links a:hover { 
+    color: #d4af37; 
+  }
+  .nero-image { 
+    width: 100%; 
+    height: 360px; 
+    background: linear-gradient(rgba(11, 17, 32, 0.5), rgba(11, 17, 32, 0.6)) , url('./image/suraka e.jpg') center/cover no-repeat; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    margin-top: 80px; 
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  } 
+  .nero-text { 
+    padding: 20px 40px; 
+    color: white; 
+    text-align: center;
+  } 
+  .nero-text h1 { 
+    font-size: 42px; 
+    letter-spacing: 1px;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  } 
+  .section-container {
+    background: #f5f5f5;
+  }
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+  }
+  .content {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+  }
+  .image-box {
+    flex: 1;
+    min-width: 300px;
+    animation: fadeInLeft 1s ease-out 0.2s both;
+  }
+  .image-box img {
+    width: 100%;
+    height: 600px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+    transition: transform 0.4s ease;
+  }
+  .image-box img:hover {
+    transform: scale(1.02);
+  }
+  .text-box {
+    flex: 2;
+    min-width: 300px;
+    animation: fadeInRight 1s ease-out 0.2s both;
+  }
+  .text-box p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #475569;
+    text-align: justify;
+  }
+  .intro-property {
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+    background-color: #0b1120;
+    font-size: 24px;
+    letter-spacing: 1px;
+    animation: fadeInUp 0.8s ease-out both;
+  }
+  .property-section { 
+    background: white; 
+    padding: 60px 50px; 
+  } 
+  .property-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
+    gap: 30px; 
+  } 
+  .property-box { 
+    background: #ffffff; 
+    border-radius: 10px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+    border: 1px solid rgba(0,0,0,0.03);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+    animation: fadeInUp 0.8s ease-out both;
+  } 
+  .property-box:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 30px rgba(11, 17, 32, 0.1);
+    border-color: rgba(212, 175, 55, 0.2);
+  } 
+  
+  [class^="property-image"] {
+    width: 100%; 
+    height: 240px; 
+    transition: transform 0.4s ease;
+  }
+  .property-box:hover [class^="property-image"] {
+    transform: scale(1.03);
+  }
+
+  .property-image1  { background: url('./image/1.1.1.webp') center/cover no-repeat; } 
+  .property-image2  { background: url('./image/1.1.3.webp') center/cover no-repeat; } 
+  .property-image3  { background: url('./image/2.4.1.jpg') center/cover no-repeat; } 
+  .property-image4  { background: url('./image/1.5.1.webp') center/cover no-repeat; } 
+  .property-image5  { background: url('./image/1.6.1.jpg') center/cover no-repeat; } 
+  .property-image6  { background: url('./image/3.6.1.jpg') center/cover no-repeat; } 
+  .property-image7  { background: url('./image/2.1.1.webp') center/cover no-repeat; } 
+  .property-image8  { background: url('./image/5.2.1.webp') center/cover no-repeat; } 
+  .property-image9  { background: url('./image/1.3.2.webp') center/cover no-repeat; } 
+  .property-image10 { background: url('./image/1.5.2.webp') center/cover no-repeat; } 
+  .property-image11 { background: url('./image/2.3.3.jpg') center/cover no-repeat; } 
+  .property-image12 { background: url('./image/4.6.1.webp') center/cover no-repeat; } 
+
+  .property-box h3 { 
+    padding: 20px 20px 8px; 
+    color: #0b1120;
+    font-size: 22px;
+    transition: color 0.3s ease;
+  } 
+  .property-box:hover h3 {
+    color: #d4af37;
+  }
+  .property-box p { 
+    padding: 0 20px 20px; 
+    color: #555; 
+    font-size: 15px;
+    line-height: 1.5;
+  } 
+
+  .section-a {
+    display: flex;
+    justify-content: center;   
+    align-items: center;      
+    padding: 60px;
+    background: #ffffff;
+  }
+  .main-btn {
+    text-decoration: none;
+    color: #0b1120;
+    border: 2px solid #0b1120;
+    padding: 15px 40px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    animation: fadeInUp 0.6s ease-out both;
+  }
+  .main-btn:hover {
+    background: #0b1120;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(11, 17, 32, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .realestate-footer {
+    position: relative;
+    background: #0b1120;
+    color: #ffffff;
+    padding: 60px 50px 40px;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  .footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+  }
+  .footer-brand h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #d4af37;
+  }
+  .footer-brand p {
+    color: #cbd5e1;
+    line-height: 1.7;
+  }
+  .footer-links h3,
+  .footer-contact h3 {
+    margin-bottom: 18px;
+    color: #d4af37;
+    font-size: 20px;
+  }
+  .footer-links a {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: 0.3s ease;
+  }
+  .footer-links a:hover {
+    color: #d4af37;
+    transform: translateX(8px);
+  }
+  .footer-contact p {
+    margin-bottom: 12px;
+    color: #cbd5e1;
+  }
+  .footer-bottom {
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      padding: 15px;
+      position: relative;
+    }
+    .nav-links {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .nero-image {
+      margin-top: 0;
+      height: 280px;
+    }
+    .nero-text h1 {
+      font-size: 32px;
+    }
+    .section-container {
+      padding: 30px 10px;
+    }
+    .container {
+      padding: 25px 20px;
+    }
+    .content {
+      flex-direction: column;
+    }
+    .image-box img {
+      height: auto;
+      max-height: 380px;
+    }
+    /* Mobile Layout Optimizations */
+    .image-box { animation: fadeInUp 0.8s ease-out 0.1s both; }
+    .text-box { animation: fadeInUp 0.8s ease-out 0.3s both; }
+    
+    .property-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .property-section {
+      padding: 30px;
+    }
+    .footer-wrapper {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .footer-links a:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .logo {
+      width: 45px;
+      height: 45px;
+    }
+    .nero-image {
+      height: 220px;
+    }
+    .nero-text h1 {
+      font-size: 24px;
+    }
+    .property-grid {
+      grid-template-columns: 1fr;
+    }
+    .property-section {
+      padding: 20px;
+    }
+    [class^="property-image"] {
+      height: 210px;
+    }
+    .main-btn {
+      padding: 12px 30px;
+      font-size: 16px;
+    }
+    .section-a {
+      padding: 40px 15px;
+    }
+  }
+.profile-pic{ 
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%; 
+  object-fit: cover; }
+</style>
+<body> 
+  <nav class="navbar"> 
+    <div><a href="./index.html"><img class="logo" src="./image/SURAKA LOGO.webp" alt=""></a></div>
+  <ul class="nav-links"> 
+      <li><a href="./homepage1.html">គេហទំេព័រដើម</a></li> 
+        <li><a href="./aboutus1.html">អំពីយើង</a></li> 
+         <li><a href="./contact១.html">ទាក់ទង់</a></li>
+        <li><a href="./guide1.html">ការណែនាំ</a></li> 
+        <li><a href="./findproperty1.html">ស្វែងរក អចលនទ្រព្យ</a></li> 
+        <li><a href="./sell1.html">លក់ អចលនទ្រព្យ</a></li> 
+        <li><a href="./homepageafter.html">បកទៅអង្គគ្លេស៍</a></li>
+        <li><a href="./account22.html"><img class="profile-pic" src="./image/Visal.jpg" alt=""></a></li> 
+    </ul> 
+  </nav> 
+  <section class="nero-image"> 
+    <div class="nero-text"> 
+      <h1>អចលនទ្រព្យ និង ការវិនិយោក</h1> 
+    </div> 
+  </section> 
+  <section>
+  <div class="container">
+    <div class="content">
+      <div class="image-box">
+        <img src="./image/siporak 1.jpg">
+      </div>
+      <div class="text-box">
+        <p>
+        អចលនទ្រព្យមានអត្ថាន័យលើសពីការទិញ និងលក់ វាគឺជាគ្រឹះទម្រដ៏រឹងមាំក្នុងការកសាងសហគមន៍ ការរីកចម្រើននៃអាជីវកម្ម និងជាកន្លែងដែលក្រុមគ្រួសារបង្កើតនូវអនុស្សាវរីយ៍មិនអាចបំភ្លេចបាន។ កម្ពុជទេស កំពុងតែជួបប្រទះនូវកំណើនសេដ្ឋកិច្ច និងការផ្លាស់ប្តូរមុខមាត់ទីក្រុងយ៉ាងគួរឱ្យកត់សម្គាល់ ដោយក្នុងនោះវិស័យអចលនទ្រព្យបានក្លាយជាក្បាលម៉ាស៊ីនរុញច្រានដ៏សំខាន់មួយសម្រាប់ការអភិវឌ្ឍ និងការវិនិយោគ។ ចាប់តាំងពីគម្រោងលំនៅឋាននៅក្នុងរាជធានីភ្នំពេញ រហូតដល់ឱកាសនានានៅតាមបណ្តាខេត្រ,ទីផ្សារកម្ពុជាផ្តល់នូវសក្តានុពលយ៉ាងខ្លាំងក្លាសម្រាប់វិនិយោគិន។គេហទំព័រនេះត្រូវបានបង្កើតឡើងក្នុងចក្ខុសម្ផស្បធ្វើឱ្យ ព័ត៌មានអចលនទ្រព្យកាន់តែមានភាពងាយស្រួលក្នុងការស្វែងរក មានតម្លាភាព និងគួរឱ្យទុកចិត្ត សម្រាប់មនុស្សគ្រប់គ្នា។ ព័ត៌មានដែលត្រឹមត្រូវ និងទាន់សម័យ គឺជារឿងចាំបាច់បំផុតក្នុងការធ្វើសេចក្តីសម្រេចចិត្តដោយឆ្លាតវៃ។ មិនថាអ្នកកំពុងស្វែងរកទិញ វិនិយោគ ជួល ឬអភិវឌ្ឍអចលនទ្រព្យនោះទេ ទីស្ថានរបស់យើងត្រៀមខ្លួនជាស្រេចក្នុងការជួយតម្រង់ទិសដៅរបស់អ្នក។បេសកកម្មរបស់យើងគឺដើម្បីផ្សារភ្ជាប់គម្លាតរវាងអ្នកស្វែងរកនិងលក់អចលនទ្រព្យ តាមរយៈឌីជីថលនីយកម្ម។ យើងជឿជាក់ថា ទំនុកចិត្ត វិជ្ជាជីវៈ និង ប្រសិទ្ធិភាព គឺជាចំណុចស្នូលនៃភាពជោគជ័យក្នុងវិស័យអចលនទ្រព្យ។ តាមរយៈការបង្ហាញព័ត៌មានលម្អិត ការវិភាគទីផ្សារ  យើងមានគោលបំណងជួយឱ្យអ្នកប្រើប្រាស់របស់យើងអាចស្វែងរក និងធ្វើការក្នុងទីផ្សារអចលនទ្រព្យកម្ពុជាបានយ៉ាងមានប្រសិទ្ធភាព។ក្នុងពេលដែលប្រទេសកម្ពុជាកំពុងបន្តដំណើរឆ្ពោះទៅរកទំនើបកម្ម និងវិបុលភាពសេដ្ឋកិច្ចយើងមានមោទនភាពយ៉ាងខ្លាំងក្នុងការចូលរួមចំណែកដល់ការរីកចម្រើននៃវិស័យអចលនទ្រព្យនេះ។យើងខ្ញុំសូមស្វាគមន៍អ្នកមកកាន់ការស្វែងរកឱកាសថ្មីៗនៅលើផ្លែតហ្វមរបស់យើង នៅក្នុងទីផ្សារអចលនទ្រព្យដ៏មានសក្តានុពលបំផុតមួយប្រចាំតំបន់អាស៊ីអាគ្នេយ៍។
+        </p>
+      </div>
+  </section>
+  <section class="intro-property"><p>ស្វែងរក អចលនទ្រព្យថ្មីនៅទីនេះ</p></section>
+  <section class="property-section"> 
+    <div class="property-grid">
+
+      <div class="property-box"> 
+        <div class="property-image1"></div> 
+        <h3>វីឡា សារីភូ</h3> 
+        <p>គេហស្ថានសម័យបារាំងលើវីថីនរោត្តម</p> 
+      </div> 
+      <div class="property-box"> 
+        <div class="property-image2"></div> 
+        <h3>ផ្ទះ យុវនាថ</h3> 
+        <p>ផ្ទះ សហសម័យ នាទួលគោក</p> 
+      </div> 
+    
+      <div class="property-box"> 
+        <div class="property-image3"></div> 
+        <h3>សុរាការជាតិខ្មែរ</h3> 
+        <p>រោងចក្រស្រាបៀរ នៅសីហនុវីល</p> 
+      </div> 
+ 
+      <div class="property-box"> 
+        <div class="property-image4"></div> 
+        <h3>អាប៊ាត់ម័ង់ ស៊ុលផ្រា</h3> 
+        <p>អាប៊ាត់ម័ង់សុីវីលៃ ទស្សនាសោភា នទីមេគង្គ</p> 
+      </div> 
+ 
+      <div class="property-box"> 
+        <div class="property-image5"></div> 
+        <h3>មជ្ឈមណ្ឌលសន្និបាត ហរិរ័ក្ស</h3> 
+        <p>សាលសន្និបាតធំថ្នី នៃក្រុងភ្នំពេញ</p> 
+      </div> 
+ 
+      <div class="property-box"> 
+        <div class="property-image6"></div> 
+        <h3>សណ្ឋាគារ គិរីស៉ារ៉ា</h3> 
+        <p>ទីសម្រក់ដ៏សុខសុខុម ទស្សនាសម្រស់ស្ទឹងសៀមរាប</p> 
+      </div> 
+ 
+       <div class="property-box"> 
+        <div class="property-image7"></div> 
+        <h3>សាវីវាំ និវេសន៍</h3> 
+        <p>វីឡាកោះក្នុងដែនជលសីសីហនុវីល</p> 
+      </div> 
+
+       <div class="property-box"> 
+        <div class="property-image8"></div> 
+        <h3>បុរី ច័ន្ទ្រាវង្ស</h3> 
+        <p>សហគមន៍ថ្មីនៃដែនអរិយក្សត្រ-នវភារា</p> 
+      </div> 
+
+       <div class="property-box"> 
+        <div class="property-image9"></div> 
+        <h3>វាល ទួលពង្រ</h3> 
+        <p>ដីមិនទាន់អភិវឌ្ឍនៅជាយក្រុង</p> 
+      </div> 
+
+       <div class="property-box"> 
+        <div class="property-image10"></div> 
+        <h3>ខ័នដូ សួគ៍ាល័យ</h3> 
+        <p>វីមាន ល្អល្អងនាដែនចម្ការមន</p> 
+      </div> 
+
+       <div class="property-box"> 
+        <div class="property-image11"></div> 
+        <h3>កោះសន្តិរ័ក្ស</h3> 
+        <p>កោះត្រូពិក មិនទាន់អភិវឌ្ឍ ១គ.មពីកំពង់សោម</p> 
+      </div> 
+     <div class="property-box"> 
+        <div class="property-image12"></div> 
+        <h3>ផ្សារខេត្រកណ្តាល</h3> 
+        <p>ផ្សារទំនើបថ្មី ដល់ តាខ្មៅ ក្រុងតិសតកសិន</p> 
+      </div> 
+    </div> 
+  </section>
+    <section class="section-a"><a href="./findproperty1.html" class="main-btn">ស្វែងរក អចលនទ្រព្យ</a></section>
+  <section>
+
+  </section>
+           <footer class="realestate-footer">
+  <div class="footer-space"></div>
+  <div class="footer-wrapper">
+    <div class="footer-brand">
+      <h2>យុវការ-កម្ពុជទេស</h2>
+      <p>
+       ដំណោះស្រាយអចលនទ្រព្យដ៏ឧត្តុង្គឧត្តម សម្រាប់ការទិញ លក់ និងជួល វិមាននិងអចលនទ្រព្យដ៏ប្រណីត ក្នុងទឹកដីកម្ពុជា។
+      </p>
+    </div>
+    <div class="footer-links">
+      <h3>ស្វែងរក</h3>
+      <a href="./sell1.html">លក់ អចលនទ្រព្យ</a>
+      <a href="./findproperty1.html">ស្វែងរក អចលនទ្រព្យ</a>
+      <a href="./guide1.html">ការណែនាំ</a>
+    </div>
+
+    <div class="footer-links">
+      <h3>ក្រុមយើង</h3>
+      <a href="./aboutus1.html">អំពីយើង</a>
+      <a href="./contact១.html">ទាក់ទង់</a>
+    </div>
+
+    <div class="footer-contact">
+      <h3>ទាក់ទង់</h3>
+      <p>អាសយដ្ឋាន អគារលេខ១២៧ ផ្លូវ៣១៥ សង្កាត់បឺងកក់២ ខណ្ឌទូលគោក រាជភារាភ្នំពេញ</p>
+      <p>លេខ ទូរស័ព្ធ 012345678</p>
+      <p>អុីមែល YUVAKAR@gmail.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© ២០២៦ យុវការ. រក្សាគ្រប់សិទ្ធិ.</p>
+  </div>
+</footer>
+
+</body> 
+</html>

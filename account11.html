@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>យុវការ-​គណនី</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Metal&family=Siemreap&display=swap" rel="stylesheet">
+<link rel="icon" type="image/webp" href="./image/SURAKA LOGO.webp">
+<style>
+    * {
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, sans-serif;
+        font-family: "Metal", serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    body {
+        min-height:100vh;
+        background: url('./image/SURAKA\ b.jpg') center/cover no-repeat fixed;
+        display:flex;
+        flex-direction:column;
+        overflow-x: hidden;
+    }
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+  .navbar { 
+    width: 100%; 
+    background: #0b1120; 
+    color: white; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 40px; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    animation: fadeInDown 0.8s ease-out forwards;
+  } 
+  .logo {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.4s ease;
+  }
+  .logo:hover {
+    transform: rotate(360deg);
+  }
+  .nav-links { 
+    display: flex; 
+    list-style: none; 
+    gap: 30px; 
+  } 
+  .nav-links a { 
+    color: white; 
+    text-decoration: none; 
+    transition: 0.3s; 
+    position: relative;
+  } 
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #d4af37;
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+  .nav-links a:hover { 
+    color: #d4af37; 
+  } 
+    .container {
+        flex:1;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        padding:140px 20px 60px 20px;
+    }
+    .account-box {
+        background: white;
+        width:100%;
+        max-width:420px;
+        padding:50px 50px;
+        border-radius:16px;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        text-align:center;
+        animation: fadeInUp 0.8s ease-out 0.3s both;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+
+    .account-box:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+    }
+    
+    .account-box h1 {
+        margin-bottom:15px;
+        color:#111827;
+        font-size: 32px;
+        font-weight: 700;
+    }
+    
+    .account-box p {
+        margin-bottom:30px;
+        color:#555;
+        font-size: 16px;
+    }
+
+    .buttons {
+        display:flex;
+        gap:15px;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+    
+    .buttons a {
+        flex: 1;
+        min-width: 140px;
+        text-decoration: none;
+    }
+
+    .buttons button {
+        width: 100%;
+        padding: 14px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    }
+    
+    .login-btn {
+        background:#0b1120;
+        color:white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    
+    .signup-btn {
+        background:#eaeaea;
+        color:#111;
+        border: 1px solid rgba(0,0,0,0.05) !important;
+    }
+
+    .buttons button:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+
+    .login-btn:hover {
+        box-shadow: 0 8px 15px rgba(11, 17, 32, 0.3);
+    }
+
+    .signup-btn:hover {
+        background: #e2e8f0;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    .footer-bottom {
+        padding: 25px;
+        text-align: center;
+        background-color: #0b1120;
+        color: #94a3b8;
+        font-size: 14px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    @media (max-width: 992px) {
+        .navbar {
+            padding: 15px 20px;
+        }
+        .nav-links {
+            gap: 15px;
+        }
+        .account-box {
+            max-width: 390px;
+            padding: 40px 35px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .navbar {
+            position: relative;
+            flex-direction: column;
+            padding: 15px;
+        }
+        .nav-links {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .container {
+            padding-top: 40px;
+        }
+        .account-box {
+            max-width: 100%;
+            padding: 40px 25px;
+        }
+        .buttons {
+            flex-direction: column;
+            gap: 12px;
+        }
+        .buttons a {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .logo {
+            width: 45px;
+            height: 45px;
+        }
+        .account-box h1 {
+            font-size: 26px;
+        }
+        .account-box p {
+            font-size: 15px;
+        }
+        .buttons button {
+            font-size: 15px;
+            padding: 12px;
+        }
+    }
+</style>
+<body>
+  <nav class="navbar"> 
+    <div><a href="./homepage1.html"><img class="logo" src="./image/SURAKA LOGO.webp" alt=""></a></div>
+    <ul class="nav-links">
+        <li><a href="./homepage1.html">គេហទំេព័រដើម</a></li> 
+      <li><a href="./aboutus1.html">អំពីយើង</a></li> 
+      <li><a href="./guide1.html">ការណែនាំ</a></li>
+      <li><a href="./contact១.html">ទាក់ទង់</a></li> 
+      <li><a href="./findproperty1.html">ស្វែងរក</a></li> 
+      <li><a href="./sell1.html">លក់ អចលនទ្រព្យ</a></li> 
+      <li><a href="./account1.html">បកទៅអង្គគ្លេស៍</a></li>
+      <li><a href="account11.html">គណនី</a></li> 
+    </ul> 
+  </nav> 
+    <div class="container">
+        <div class="account-box">
+            <h1>សូមស្វាគមន៍</h1>
+            <p>តើអ្នកមានគណីហើយនៅ?</p>
+            <div class="buttons">
+                <a href="./login1.html"><button class="login-btn">ចូលគណនី</button></a>
+                <a href="./signup1.html"><button class="signup-btn">ចុះ ឈ្មោះ</button></a>
+            </div>
+        </div>
+    </div>
+<div class="footer-bottom">
+    <p>© 2026 យុវការ. រក្សាគ្រប់សិទ្ធិ.</p>
+  </div>
+</body>
+</html>

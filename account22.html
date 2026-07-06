@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>យុវការ-​គណនី</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Metal&display=swap" rel="stylesheet">
+<link rel="icon" type="image/webp" href="./image/SURAKA LOGO.webp">
+  
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+      font-family: "Metal", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+body {
+    background: whitesmoke;
+    overflow-x: hidden;
+}
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+  .navbar { 
+    width: 100%; 
+    background: #0b1120; 
+    color: white; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 40px; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    animation: fadeInDown 0.8s ease-out forwards;
+  } 
+  .logo {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.4s ease;
+  }
+  .logo:hover {
+    transform: rotate(360deg);
+  }
+  .nav-links { 
+    display: flex; 
+    list-style: none; 
+    gap: 30px; 
+    align-items: center;
+  } 
+  .nav-links a { 
+    color: white; 
+    text-decoration: none; 
+    transition: 0.3s; 
+    position: relative;
+  } 
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #d4af37;
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+  .nav-links a:hover { 
+    color: #d4af37; 
+  }
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid transparent;
+    transition: 0.3s ease;
+}
+.nav-links a:hover .profile-pic {
+    border-color: #d4af37;
+}
+.banner {
+    background: url("./image/SURAKA\ b.jpg") center/cover;
+    background-color: #8b5a2b; 
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    padding: 20px;
+    text-shadow: 2px 2px 6px rgba(0,0,0,.7);
+    margin-top: 80px; 
+}
+.banner h1 {
+    font-size: 36px;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.container {
+    display: flex;
+    gap: 35px;
+    padding: 40px 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.sidebar {
+    width: 260px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    height: fit-content;
+    animation: fadeInLeft 0.8s ease-out 0.3s both;
+}
+.sidebar h3 {
+    margin-bottom: 18px;
+    color: #333;
+}
+.sidebar a {
+    display: block;
+    text-decoration: none;
+    color: #444;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+.sidebar a:hover,
+.sidebar a.active {
+    background: #f4f4f4;
+    color: #8b5a2b;
+    font-weight: bold;
+    transform: translateX(5px);
+}
+.profile {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    overflow: hidden;
+    animation: fadeInRight 0.8s ease-out 0.3s both;
+}
+.profile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.profile-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px;
+    gap: 20px;
+}
+.profile-info {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.profile-info img {
+    width: 220px;
+    height: 220px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.details p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #555;
+}
+.side-image img {
+    width: 180px;
+    transition: transform 0.4s ease;
+}
+.side-image img:hover {
+    transform: scale(1.05);
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 35px;
+}
+.fav-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.fav-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+.fav-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+.fav-details {
+    padding: 12px;
+}
+.fav-details h4 {
+    margin-bottom: 5px;
+    color: #333;
+}
+.fav-details p {
+    color: #8b5a2b;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.history-table-container {
+    padding: 35px;
+    overflow-x: auto;
+}
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+.history-table th, .history-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+}
+.history-table th {
+    background-color: #f8f9fa;
+    color: #333;
+}
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.status-completed { background: #e6f4ea; color: #137333; }
+.status-pending { background: #fef7e0; color: #b06000; }
+
+.realestate-footer {
+    position: relative;
+    background: #0b1120;
+    color: #ffffff;
+    padding: 50px;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+}
+.footer-space {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 300px;
+    background: transparent;
+}
+.footer-wrapper {
+    margin-left: 150px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+}
+.footer-brand h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #d4af37;
+}
+.footer-brand p {
+    color: #cbd5e1;
+    line-height: 1.7;
+}
+.footer-links h3,
+.footer-contact h3 {
+    margin-bottom: 18px;
+    color: #d4af37;
+    font-size: 20px;
+}
+.footer-links a {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: 0.3s ease;
+}
+.footer-links a:hover {
+    color: #d4af37;
+    transform: translateX(8px);
+}
+.footer-contact p {
+    margin-bottom: 12px;
+    color: #cbd5e1;
+}
+.footer-bottom {
+    margin-top: 50px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+}
+@media (max-width: 992px) {
+    
+    .navbar {
+        padding: 15px 20px;
+    }
+    .nav-links {
+        gap: 15px;
+    }
+    
+
+    .container {
+        flex-direction: column;
+        padding: 30px 20px;
+    }
+    .sidebar {
+        width: 100%;
+    }
+    .sidebar a:hover {
+        transform: translateX(0);
+    }
+    .profile-body {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .side-image img {
+        width: 150px;
+    }
+    .footer-wrapper {
+        margin-left: 0;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-space {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+   
+    .navbar {
+        flex-direction: column;
+        padding: 15px;
+        position: relative;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+    
+    
+    .banner {
+        margin-top: 0;
+        padding: 60px 20px;
+        height: auto;
+    }
+    .banner h1 {
+        font-size: 32px;
+    }
+    
+
+    .profile-top {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    .profile-body {
+        padding: 20px;
+        text-align: center;
+    }
+    .profile-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .profile-info img {
+        width: 180px;
+        height: 180px;
+    }
+    .details p {
+        font-size: 16px;
+    }
+    .side-image img {
+        width: 130px;
+    }
+    .realestate-footer {
+        padding: 40px 20px;
+    }
+    .footer-wrapper {
+        margin-left: 0;
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+    .banner h1 {
+        font-size: 26px;
+    }
+    .profile-info img {
+        width: 140px;
+        height: 140px;
+    }
+    .details p {
+        font-size: 14px;
+        word-break: break-word;
+    }
+    .profile-top h2 {
+        font-size: 20px;
+    }
+    .sidebar h3 {
+        text-align: center;
+    }
+    .favorites-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    .footer-brand h2 {
+        font-size: 26px;
+    }
+}
+</style>
+</head>
+<body>
+
+  <nav class="navbar"> 
+    <div><a href="./homepageafter1.html"><img class="logo" src="./image/SURAKA LOGO.webp" alt="Logo"></a></div>
+    <ul class="nav-links">
+      <li><a href="./homepageafter1.html">គេហទំេព័រ</a></li>  
+      <li><a href="./aboutus1.html">អំពីយើង</a></li> 
+      <li><a href="./guide1.html">ការណែនាំ</a></li>
+      <li><a href="./contact.html">ទាក់ទង់</a></li> 
+      <li><a href="./findproperty1.html">ស្វែងរក អចលនទ្រព្យ</a></li> 
+      <li><a href="./sell1.html">លក់ អចលនទ្រព្យ</a></li> 
+      <li><a href="./account2.html">បកទៅអង្គគ្លេស៍</a></li>
+      <li><a href="./account22.html"><img class="profile-pic" src="./image/Visal.jpg" alt="Profile"></a></li>
+    </ul> 
+  </nav> 
+
+<section class="banner">
+    <h1>គណនីនៃរបស់អ្នក</h1>
+</section>
+
+<div class="container">
+    <div class="sidebar">
+        <h3>គណនីខ្ញុំ</h3>
+        <a onclick="switchTab('details-tab', this)" class="active">
+            <i class="fa-solid fa-user" style="margin-right: 8px;"></i> ព័ត៍មានគណនី
+        </a>
+        <a onclick="switchTab('favorites-tab', this)">
+            <i class="fa-regular fa-heart" style="margin-right: 8px;"></i> ចមចិត្រ
+        </a>
+        <a onclick="switchTab('history-tab', this)">
+            <i class="fa-solid fa-clock-rotate-left" style="margin-right: 8px;"></i> ប្រវត្តិ សកម្មភាព
+        </a>
+        <a href="./account11.html">
+            <i class="fa-solid fa-right-from-bracket" style="margin-right: 8px;"></i> ចេញ គ​ណនី
+        </a>
+    </div>
+
+    <div class="profile">
+        <div class="profile-top">
+            <h2 id="card-title">ព័ត៍មានគណនី</h2>
+        </div>
+        
+        <div id="details-tab" class="tab-content active">
+            <div class="profile-body">
+                <div class="profile-info">
+                    <img src="./image/Visal.jpg" alt="Profile View">
+                    <div class="details">
+                        <p><b>ឈ្មោះ:</b>ង្វៀន វ៉ាន់ធឿង</p>
+                        <p><b>អុីមែល:</b> Vanthoung vietmy@gmail.com</p>
+                        <p><b>ភេទ:</b> ប្រុស</p>
+                        <p><b>លេខទូរស័ព្ធ:</b> 095 773668</p>
+                        <p><b>តំបន់រស់់នៅ:</b> ក្រុង ភ្នំពេញ</p>
+                    </div>
+                </div>
+                <div class="side-image">
+                    <img src="./image/SURAKA Q2.jpg" alt="Side Decor">
+                </div>
+            </div>
+        </div>
+
+        <div id="favorites-tab" class="tab-content">
+            <div class="favorites-grid">
+                <div class="fav-card">
+                    <img src="./image/4.3.2.jpg" alt="Property">
+                    <div class="fav-details">
+                        <h4>ដី ស្រីនិច</h4>
+                        <p>$45,000</p>
+                    </div>
+                </div>
+                <div class="fav-card">
+                    <img src="./image/1.1.1.webp" alt="Property">
+                    <div class="fav-details">
+                        <h4>វីឡា សារីភូ</h4>
+                        <p>$7,500,000</p>
+                    </div>
+                </div>
+                <div class="fav-card">
+                    <img src="./image/1.4.1.jpg" alt="Property">
+                    <div class="fav-details">
+                        <h4>អគ្គីសនីស្ថានអាតូមីកស៊ុនលី </h4>
+                        <p>$70,000,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="history-tab" class="tab-content">
+            <div class="history-table-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>អចលនទ្រព្យ</th>
+                            <th>ថេរវេលា</th>
+                            <th>សកម្មភាព</th>
+                            <th>តម្លៃ</th>
+                            <th>ស្ថានភាព</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ផ្ទះ យុវនាថ</td>
+                            <td>សីហា ១៤, ២០២៥</td>
+                            <td>ទាក់ទង់</td>
+                            <td>$800,000</td>
+                            <td><span class="status-badge status-completed">សម្រាច</span></td>
+                        </tr>
+                        <tr>
+                            <td>ផ្ទះ ជីរ៉ាយូ</td>
+                            <td>មីថុនា ០២, ២០២៦</td>
+                            <td>ដាក់ លក់</td>
+                            <td>$80,000</td>
+                            <td><span class="status-badge status-pending">ក្នុងដំណើរ</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+ 
+</div>
+       <footer class="realestate-footer">
+  <div class="footer-space"></div>
+  <div class="footer-wrapper">
+    <div class="footer-brand">
+      <h2>យុវការ-កម្ពុជទេស</h2>
+      <p>
+       ដំណោះស្រាយអចលនទ្រព្យដ៏ឧត្តុង្គឧត្តម សម្រាប់ការទិញ លក់ និងជួល វិមាននិងអចលនទ្រព្យដ៏ប្រណីត ក្នុងទឹកដីកម្ពុជា។
+      </p>
+    </div>
+    <div class="footer-links">
+      <h3>ស្វែងរក</h3>
+      <a href="./sell1.html">លក់ អចលនទ្រព្យ</a>
+      <a href="./findproperty1.html">ស្វែងរក អចលនទ្រព្យ</a>
+      <a href="./guide1.html">ការណែនាំ</a>
+    </div>
+
+    <div class="footer-links">
+      <h3>ក្រុមយើង</h3>
+      <a href="./aboutus1.html">អំពីយើង</a>
+      <a href="./contact១.html">ទាក់ទង់</a>
+    </div>
+
+    <div class="footer-contact">
+      <h3>ទាក់ទង់</h3>
+      <p>អាសយដ្ឋាន អគារលេខ១២៧ ផ្លូវ៣១៥ សង្កាត់បឺងកក់២ ខណ្ឌទូលគោក រាជភារាភ្នំពេញ</p>
+      <p>លេខ ទូរស័ព្ធ 012345678</p>
+      <p>អុីមែល YUVAKAR@gmail.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© ២០២៦ យុវការ. រក្សាគ្រប់សិទ្ធិ.</p>
+  </div>
+</footer> 
+
+<script>
+function switchTab(tabId, element) {
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    
+    const links = document.querySelectorAll('.sidebar a');
+    links.forEach(link => link.classList.remove('active'));
+    
+    document.getElementById(tabId).classList.add('active');
+    element.classList.add('active');
+    
+    const title = document.getElementById('card-title');
+    if(tabId === 'details-tab') title.textContent = "Account Details";
+    if(tabId === 'favorites-tab') title.textContent = "My Favorites";
+    if(tabId === 'history-tab') title.textContent = "Sales Activity History";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>យុវការ-​ការណៃនាំ</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Metal&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/webp" href="./image/SURAKA LOGO.webp">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Metal", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        :root {
+            --primary: #0b1120;
+            --primary-light: #041835;
+            --accent: #d4af37;
+            --text-dark: #1e293b;
+            --text-muted: #475569;
+            --bg-main: #f8fafc;
+            --bg-card: #f1f5f9;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        body {
+            background: var(--bg-main);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .navbar { 
+            width: 100%; 
+            background: var(--primary-light); 
+            color: white; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px 40px; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            animation: fadeInDown 0.8s ease-out forwards;
+        } 
+        .logo-link {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            transition: var(--transition);
+        }
+        .logo:hover {
+            transform: rotate(360deg);
+        }
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 25px; 
+        } 
+        .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            font-size: 15px;
+            font-weight: 500;
+            transition: var(--transition); 
+            position: relative;
+            padding: 5px 0;
+        } 
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover { 
+            color: var(--accent); 
+        }
+        .nero-image { 
+            width: 100%; 
+            height: 380px; 
+            background: url('./image/suraka e.jpg') center/cover no-repeat; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            margin-top: 80px; 
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        } 
+        .nero-text h1 { 
+            font-size: 46px; 
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1.5px;
+            text-align: center;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        } 
+        .documents-section {
+            padding: 80px 8%;
+            background: white;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-light);
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            animation: fadeInDown 0.6s ease-out 0.2s both;
+        }
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .document-card {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background: var(--bg-card);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: var(--transition);
+            animation: fadeInUp 0.8s ease-out both;
+            text-decoration: none;
+        }
+        .document-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 30px rgba(4, 24, 53, 0.08);
+            background: #ffffff;
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+        .document-preview {
+            width: 120px;
+            height: 160px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            flex-shrink: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+        .document-card:hover .document-preview {
+            transform: scale(1.04);
+            border-color: var(--accent);
+        }
+        .document-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .document-info {
+            flex: 1;
+        }
+        .document-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary-light);
+            font-size: 20px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .document-card:hover .document-info h3 {
+            color: var(--accent);
+        }
+        .document-info p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        .section-a {
+            display: flex;
+            justify-content: center;   
+            align-items: center;      
+            padding: 80px 20px;
+            background: var(--bg-main);
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 45px;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        }
+        .content {
+            display: flex;
+            gap: 45px;
+            align-items: center;
+        }
+        .image-box {
+            flex: 1;
+            min-width: 320px;
+            animation: fadeInLeft 1s ease-out 0.3s both;
+        }
+        .image-box a {
+            display: block;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+        .image-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .image-box img:hover {
+            transform: scale(1.03);
+        }
+        .text-box {
+            flex: 1.5;
+            min-width: 320px;
+            animation: fadeInRight 1s ease-out 0.3s both;
+        }
+        .text-box p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+        .realestate-footer {
+            background: var(--primary-light);
+            color: #ffffff;
+            padding: 70px 40px 30px 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 40px;
+        }
+        .footer-brand h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        .footer-brand p {
+            color: #cbd5e1;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        .footer-links h3,
+        .footer-contact h3 {
+            margin-bottom: 22px;
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .footer-links a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-bottom: 12px;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(6px);
+        }
+        .footer-contact p {
+            margin-bottom: 12px;
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 60px auto 0 auto;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        @media (max-width: 1024px) {
+            .documents-section { padding: 60px 4%; }
+            .footer-wrapper { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+                position: relative;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            .nero-image {
+                margin-top: 0;
+                height: 260px;
+            }
+            .nero-text h1 {
+                font-size: 32px;
+            }
+            .documents-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .document-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .section-a {
+                padding: 40px 15px;
+            }
+            .container {
+                padding: 30px 20px;
+            }
+            .content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .image-box, .text-box {
+                width: 100%;
+                min-width: 100%;
+            }
+            .image-box { animation: fadeInUp 0.8s ease-out 0.2s both; }
+            .text-box { animation: fadeInUp 0.8s ease-out 0.4s both; }
+            .text-box p {
+                font-size: 15px;
+                text-align: left;
+            }
+            .realestate-footer {
+                padding: 50px 20px 25px 20px;
+                text-align: center;
+            }
+            .footer-wrapper {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+            .footer-links a:hover {
+                transform: translateX(0) translateY(-2px);
+            }
+            .section-title {
+                font-size: 28px;
+                margin-bottom: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar"> 
+    <div><a href="./homepage1.html"><img class="logo" src="./image/SURAKA LOGO.webp" alt=""></a></div>
+    <ul class="nav-links"> 
+      <li><a href="./homepage1.html">គេហទំេព័រ</a></li> 
+        <li><a href="./aboutus1.html">អំពីយើង</a></li> 
+         <li><a href="./contact១.html">ទាក់ទង់</a></li>
+        <li><a href="./guide1.html">ការណែនាំ</a></li> 
+        <li><a href="./findproperty1.html">ស្វែងរកអចលនទ្រព្យ</a></li> 
+        <li><a href="./sell1.html">លក់អចលនទ្រព្យ</a></li>
+        <li><a href="./guide.html">បកទៅអង្គគ្លេស៍</a></li>
+        <li><a href="./account11.html">គណនី</a></li> 
+    </ul> 
+  </nav> 
+
+  <section class="nero-image"> 
+    <div class="nero-text"> 
+      <h1>យុវការ-ណែនាំ</h1> 
+    </div> 
+  </section> 
+<section class="documents-section">
+
+    <h2 class="section-title">
+     ឯកសារ   
+    </h2>
+
+    <div class="documents-grid">
+
+        <div class="document-card">
+            <div class="document-preview">
+                <a href="image/doc1.jpg"><img src="./image/doc1.jpg" alt="Document Image"></a>
+            </div>
+
+            <div class="document-info">
+                <h3>ចុះបញ្ជី ប្លងរឹង</h3>
+                <p>រដ្ឋាបាលប្រកាសធ្វើប្លងរឹង នៅស្រុកពួកខេត្រសៀមរាប</p>
+            </div>
+        </div>
+        <div class="document-card">
+            <div class="document-preview">
+                <a href="image/doc2.jpg"><img src="./image/doc2.jpg" alt="Document Image"></a>
+            </div>
+            <div class="document-info">
+                <h3>ចុះបញ្ជី ប្លងរឹង</h3>
+                <p>រដ្ឋាបាលប្រកាសធ្វើប្លងរឹង នៅខណ្ឌដង្កោក្រុងភ្នំពេញ</p>
+            </div>
+        </div>
+        <div class="document-card">
+            <a href="image/doc3.pdf" target="_blank" class="document-preview">
+                <img src="./image/cover1.jpg" alt="">
+            </a>
+
+            <div class="document-info">
+                <h3>ច្បាប់ អចលនទ្រព្យ</h3>
+                <p>ឯកសារ ក្រសួងដែនដីនិងនគរូបនីយកម្ម</p>
+            </div>
+        </div>
+        <div class="document-card">
+            <a href="image/doc4.pdf" target="_blank" class="document-preview">
+                <img src="./image/cover2.jpg" alt="">
+            </a>
+
+            <div class="document-info">
+                <h3>សិក្សាកថា ច្បាប់ អចលនទ្រព្យ</h3>
+                <p>សិក្សាកថា របស់ ស្រះហែម នៃមហាវិទ្យាល័យ កម្ពុជា</p>
+            </div>
+        </div>
+        <div class="document-card">
+            <a href="image/doc5.pdf" target="_blank" class="document-preview">
+                <img src="image/cover3.jpg" alt="">
+            </a>
+
+            <div class="document-info">
+                <h3>សិក្សាកថា បម្រើប្រាស់ដី</h3>
+                <p>សិក្សាកថាឯករាជ្យ ក្រសួងដែនដីនិងនគរូបនីយកម្ម</p>
+            </div>
+        </div>
+        <div class="document-card">
+            <a href="image/doc6.pdf" target="_blank" class="document-preview">
+                <img src="image/cover4.jpg" alt="">
+            </a>
+            <div class="document-info">
+                <h3>សិក្សាកថា នគរូបនីយកម្ម</h3>
+                <p>សិក្សាកថាឯករាជ្យ នៃការអភិវឌ្ឍក្រុងភ្នំពេញ</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+  <section>
+  <div class="container">
+    <div class="content">
+      <div class="image-box">
+        <a href="image/phnom-penh-land-use-master-plan-2035.jpg"><img src="./image/phnom-penh-land-use-master-plan-2035.jpg"></a>
+      </div>
+      <div class="text-box">
+        <p>
+        ភ្នំពេញ ដែលជារាជធានីនៃប្រទេសកម្ពុជា បាននិងកំពុងជួបប្រទះនូវការរីកចម្រើនយ៉ាងឆាប់រហ័សគួរឱ្យកត់សម្គាល់ក្នុងរយៈពេលពីរទសវត្សរ៍ចុងក្រោយនេះ។ កំណើននគរូបនីយកម្មយ៉ាងលឿន ការកើនឡើងនៃចំនួនប្រជាជន និងលំហូរវិនិយោគពីបរទេស បានផ្លាស់ប្តូរទីក្រុងមួយនេះឱ្យទៅជាមជ្ឈមណ្ឌលសេដ្ឋកិច្ច និងពាណិជ្ជកម្មរបស់ជាតិ។ ចំនួនប្រជាជនបានកើនឡើងដល់ជាង ២,៥ លាននាក់ ដែលជំរុញឱ្យមានតម្រូវការខ្ពស់លើផ្នែកលំនៅឋាន ការដឹកជញ្ជូន និងសេវាសាធារណៈ។
+
+        ទោះជាយ៉ាងណាក៏ដោយ ការពង្រីកទីក្រុងយ៉ាងគំហុកនេះក៏បានបង្កើតជាបញ្ហាប្រឈមជាច្រើនផងដែរ រួមមានការកកស្ទះចរាចរណ៍ ក្តីបារម្ភផ្នែកបរិស្ថាន និងសម្ពាធលើប្រព័ន្ធប្រើប្រាស់សាធារណៈ។ ដើម្បីទ្រទ្រង់កំណើនទៅថ្ងៃអនាគត ភ្នំពេញត្រូវតែរក្សាឱ្យបាននូវតុល្យភាពរវាងការអភិវឌ្ឍសេដ្ឋកិច្ច ជាមួយនឹងការរៀបចំផែនការនគរូបនីយកម្មប្រកបដោយប្រសិទ្ធភាព ការការពារបរិស្ថាន និងការលើកកម្ពស់គុណភាពជីវិតរស់នៅ។
+
+        </p>
+      </div>
+  </section>
+       <footer class="realestate-footer">
+  <div class="footer-space"></div>
+  <div class="footer-wrapper">
+    <div class="footer-brand">
+      <h2>យុវការ-កម្ពុជទេស</h2>
+      <p>
+       ដំណោះស្រាយអចលនទ្រព្យដ៏ឧត្តុង្គឧត្តម សម្រាប់ការទិញ លក់ និងជួល វិមាននិងអចលនទ្រព្យដ៏ប្រណីត ក្នុងទឹកដីកម្ពុជា។
+      </p>
+    </div>
+    <div class="footer-links">
+      <h3>ស្វែងរក</h3>
+      <a href="./sell1.html">លក់ អចលនទ្រព្យ</a>
+      <a href="./findproperty1.html">ស្វែងរក អចលនទ្រព្យ</a>
+      <a href="./guide1.html">ការណែនាំ</a>
+    </div>
+
+    <div class="footer-links">
+      <h3>ក្រុមយើង</h3>
+      <a href="./aboutus1.html">អំពីយើង</a>
+      <a href="./contact១.html">ទាក់ទង់</a>
+    </div>
+
+    <div class="footer-contact">
+      <h3>ទាក់ទង់</h3>
+      <p>អាសយដ្ឋាន អគារលេខ១២៧ ផ្លូវ៣១៥ សង្កាត់បឺងកក់២ ខណ្ឌទូលគោក រាជភារាភ្នំពេញ</p>
+      <p>លេខ ទូរស័ព្ធ 012345678</p>
+      <p>អុីមែល YUVAKAR@gmail.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© ២០២៦ យុវការ. រក្សាគ្រប់សិទ្ធិ.</p>
+  </div>
+</footer>
+</body>
+</html>
